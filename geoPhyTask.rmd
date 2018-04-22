@@ -68,6 +68,7 @@ condoDataset$NTA <- gsub("[[:blank:]]+", "", condoDataset$NTA)
 allCondoNTA <- table(condoDataset$NTA)[order(table(condoDataset$NTA), decreasing = T)]
 ntaCostDF <- data.frame(condoDataset$NTA, condoDataset$MANHATTAN.CONDOMINIUM.PROPERTY.Market.Value.per.SqFt, stringsAsFactors = F)
 avgNTACostDF <- data.frame(NTA = names(allCondoNTA), AverageValue = numeric(length = length(allCondoNTA)), stringsAsFactors = F)
+
 for (i in 1:length(allCondoNTA)) {
   tmpRows <- ntaCostDF[grep(names(allCondoNTA)[i], ntaCostDF$condoDataset.NTA, fixed = T), ]
   avgNTACostDF$AverageValue[i] <- mean(tmpRows[[2]])
