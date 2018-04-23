@@ -1,0 +1,334 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={GeoPhy Task},
+            pdfauthor={Nirupama Benis},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{GeoPhy Task}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Nirupama Benis}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{April 22, 2018}
+
+
+\begin{document}
+\maketitle
+
+\subsection{Overview of task}\label{overview-of-task}
+
+The assigned task was to download two datasets from the New York City
+Open Data website. One dataset contains information on the condomonidum
+rent income and the other has information on New York City community
+gardens. This script shows how I downloaded the datasets and processed
+them to answer the given questions.
+
+\subsection{Datasets}\label{datasets}
+
+I downloaded the CSV versions of the datasets, although other versions
+like the RDF were available I did not see an added benefit in working
+with it for this task. Then I loaded the datasets into the R
+environment.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{condoDataset <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"/home/niru/allInfoDir/otherWorkspaces/geophy/Data/DOF__Condominium_comparable_rental_income___Manhattan_-_FY_2010_2011.csv"}\NormalTok{, }\DataTypeTok{as.is =}\NormalTok{ T)}
+\NormalTok{condoDataset <-}\StringTok{ }\NormalTok{condoDataset[}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(condoDataset}\OperatorTok{$}\NormalTok{Latitude), ]}
+
+\NormalTok{greenThumbDataset <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"/home/niru/allInfoDir/otherWorkspaces/geophy/Data/NYC_Greenthumb_Community_Gardens.csv"}\NormalTok{, }\DataTypeTok{as.is =}\NormalTok{ T)}
+\NormalTok{greenThumbDataset <-}\StringTok{ }\NormalTok{greenThumbDataset[}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(greenThumbDataset}\OperatorTok{$}\NormalTok{Latitude), ]}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Task 1 - Visualize the datasets on a
+map}\label{task-1---visualize-the-datasets-on-a-map}
+
+I used the R package \texttt{ggmaps} to plot the data points
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggmap)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: ggplot2
+\end{verbatim}
+
+The Green Thumbs dataset has a bigger geographical spread than the
+condomonium dataset so I used that the center for the map of New York
+City.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{centerGreen <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{mean}\NormalTok{(}\KeywordTok{range}\NormalTok{(greenThumbDataset}\OperatorTok{$}\NormalTok{Longitude)), }\KeywordTok{mean}\NormalTok{(}\KeywordTok{range}\NormalTok{(greenThumbDataset}\OperatorTok{$}\NormalTok{Latitude)))}
+\NormalTok{mapNY <-}\StringTok{ }\KeywordTok{get_googlemap}\NormalTok{(}\DataTypeTok{center =}\NormalTok{ centerGreen, }\DataTypeTok{zoom =} \DecValTok{11}\NormalTok{)}
+
+\KeywordTok{ggmap}\NormalTok{(mapNY)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{geoPhyTask_files/figure-latex/visualize2-1.pdf}
+
+Then I plotted the condomoniums (in black) and the community gardens (in
+purple).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mapPoints <-}\StringTok{ }\KeywordTok{ggmap}\NormalTok{(mapNY) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ condoDataset}\OperatorTok{$}\NormalTok{Longitude, }\DataTypeTok{y =}\NormalTok{ condoDataset}\OperatorTok{$}\NormalTok{Latitude), }\DataTypeTok{data =}\NormalTok{ condoDataset, }\DataTypeTok{alpha =}\NormalTok{ .}\DecValTok{5}\NormalTok{, }\DataTypeTok{col =} \StringTok{"black"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ greenThumbDataset}\OperatorTok{$}\NormalTok{Longitude, }\DataTypeTok{y =}\NormalTok{ greenThumbDataset}\OperatorTok{$}\NormalTok{Latitude), }\DataTypeTok{data =}\NormalTok{ greenThumbDataset, }\DataTypeTok{alpha =} \DecValTok{1}\NormalTok{, }\DataTypeTok{col =} \StringTok{"purple"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.title.x =} \KeywordTok{element_blank}\NormalTok{(), }\DataTypeTok{axis.title.y =} \KeywordTok{element_blank}\NormalTok{())}
+
+\NormalTok{mapPoints}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{geoPhyTask_files/figure-latex/visualize3-1.pdf}
+
+The two datasets overlapped in only a few areas. By overlaying the value
+per square foot I see that the overlapping areas have lower costs of
+condomoniums.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mapPointsValue <-}\StringTok{ }\KeywordTok{ggmap}\NormalTok{(mapNY) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ condoDataset}\OperatorTok{$}\NormalTok{Longitude, }\DataTypeTok{y =}\NormalTok{ condoDataset}\OperatorTok{$}\NormalTok{Latitude, }\DataTypeTok{color =}\NormalTok{ condoDataset}\OperatorTok{$}\NormalTok{MANHATTAN.CONDOMINIUM.PROPERTY.Market.Value.per.SqFt), }\DataTypeTok{data =}\NormalTok{ condoDataset, }\DataTypeTok{alpha =}\NormalTok{ .}\DecValTok{5}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{scale_color_gradient}\NormalTok{(}\DataTypeTok{high =} \StringTok{"red4"}\NormalTok{, }\DataTypeTok{low =} \StringTok{"coral"}\NormalTok{, }\DataTypeTok{name =} \StringTok{"ValuePerSqFt"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ greenThumbDataset}\OperatorTok{$}\NormalTok{Longitude, }\DataTypeTok{y =}\NormalTok{ greenThumbDataset}\OperatorTok{$}\NormalTok{Latitude), }\DataTypeTok{data =}\NormalTok{ greenThumbDataset, }\DataTypeTok{alpha =} \DecValTok{1}\NormalTok{, }\DataTypeTok{col =} \StringTok{"purple"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.title.x =} \KeywordTok{element_blank}\NormalTok{(), }\DataTypeTok{axis.title.y =} \KeywordTok{element_blank}\NormalTok{())}
+
+\NormalTok{mapPointsValue}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{geoPhyTask_files/figure-latex/visualize4-1.pdf}
+
+\subsection{Task 2 - Expensive Neighbourhood Tabulation
+Area}\label{task-2---expensive-neighbourhood-tabulation-area}
+
+In order to look at the property values of the NTAs, I looked at the
+average of the property values in each NTA in the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{condoDataset}\OperatorTok{$}\NormalTok{NTA <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\StringTok{"[[:blank:]]+"}\NormalTok{, }\StringTok{""}\NormalTok{, condoDataset}\OperatorTok{$}\NormalTok{NTA)}
+\NormalTok{allCondoNTA <-}\StringTok{ }\KeywordTok{table}\NormalTok{(condoDataset}\OperatorTok{$}\NormalTok{NTA)[}\KeywordTok{order}\NormalTok{(}\KeywordTok{table}\NormalTok{(condoDataset}\OperatorTok{$}\NormalTok{NTA), }\DataTypeTok{decreasing =}\NormalTok{ T)]}
+\NormalTok{ntaCostDF <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(condoDataset}\OperatorTok{$}\NormalTok{NTA, condoDataset}\OperatorTok{$}\NormalTok{MANHATTAN.CONDOMINIUM.PROPERTY.Market.Value.per.SqFt, }\DataTypeTok{stringsAsFactors =}\NormalTok{ F)}
+
+\NormalTok{avgNTACostDF <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{NTA =} \KeywordTok{names}\NormalTok{(allCondoNTA), }\DataTypeTok{AverageValue =} \KeywordTok{numeric}\NormalTok{(}\DataTypeTok{length =} \KeywordTok{length}\NormalTok{(allCondoNTA)), }\DataTypeTok{stringsAsFactors =}\NormalTok{ F)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(allCondoNTA)) \{}
+\NormalTok{  tmpRows <-}\StringTok{ }\NormalTok{ntaCostDF[}\KeywordTok{grep}\NormalTok{(}\KeywordTok{names}\NormalTok{(allCondoNTA)[i], ntaCostDF}\OperatorTok{$}\NormalTok{condoDataset.NTA, }\DataTypeTok{fixed =}\NormalTok{ T), ]}
+\NormalTok{  avgNTACostDF}\OperatorTok{$}\NormalTok{AverageValue[i] <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(tmpRows[[}\DecValTok{2}\NormalTok{]])}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+There are a total of 28 NTAs in the condomonium dataset, of which the
+one called ``park-cemetery-etc-Manhattan'' had one property that had the
+highest value per square foot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{avgNTACostDF[}\KeywordTok{which.max}\NormalTok{(avgNTACostDF}\OperatorTok{$}\NormalTok{AverageValue), ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                            NTA AverageValue
+## 28 park-cemetery-etc-Manhattan          299
+\end{verbatim}
+
+Since this NTA only has one property listed there are not many
+conclusions that can be made, although a visualisation did show that it
+is right in the middle of Central Park.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{priciestNTA <-}\StringTok{ }\NormalTok{avgNTACostDF}\OperatorTok{$}\NormalTok{NTA[}\KeywordTok{which.max}\NormalTok{(avgNTACostDF}\OperatorTok{$}\NormalTok{AverageValue)]}
+\NormalTok{priciestNTAData <-}\StringTok{ }\NormalTok{condoDataset[}\KeywordTok{grep}\NormalTok{(priciestNTA, condoDataset}\OperatorTok{$}\NormalTok{NTA, }\DataTypeTok{fixed =}\NormalTok{ T), ]}
+
+\NormalTok{mapPointsPriciest <-}\StringTok{ }\KeywordTok{ggmap}\NormalTok{(mapNY) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ condoDataset}\OperatorTok{$}\NormalTok{Longitude, }\DataTypeTok{y =}\NormalTok{ condoDataset}\OperatorTok{$}\NormalTok{Latitude), }\DataTypeTok{data =}\NormalTok{ condoDataset, }\DataTypeTok{alpha =}\NormalTok{ .}\DecValTok{5}\NormalTok{, }\DataTypeTok{col =} \StringTok{"black"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ greenThumbDataset}\OperatorTok{$}\NormalTok{Longitude, }\DataTypeTok{y =}\NormalTok{ greenThumbDataset}\OperatorTok{$}\NormalTok{Latitude), }\DataTypeTok{data =}\NormalTok{ greenThumbDataset, }\DataTypeTok{alpha =}\NormalTok{ .}\DecValTok{5}\NormalTok{, }\DataTypeTok{col =} \StringTok{"purple"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ priciestNTAData}\OperatorTok{$}\NormalTok{Longitude, }\DataTypeTok{y =}\NormalTok{ priciestNTAData}\OperatorTok{$}\NormalTok{Latitude), }\DataTypeTok{data =}\NormalTok{ priciestNTAData, }\DataTypeTok{alpha =}\NormalTok{ .}\DecValTok{5}\NormalTok{, }\DataTypeTok{col =} \StringTok{"red"}\NormalTok{)}
+
+\NormalTok{mapPointsPriciest}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{geoPhyTask_files/figure-latex/maximumValue3-1.pdf}
+
+\subsection{Task 3a - Green Thumb
+Data}\label{task-3a---green-thumb-data}
+
+There are 18 NTAs from the condominium dataset that have community
+gardens.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{greenThumbDataset}\OperatorTok{$}\NormalTok{NTA <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\StringTok{"[[:blank:]]+"}\NormalTok{, }\StringTok{""}\NormalTok{,  greenThumbDataset}\OperatorTok{$}\NormalTok{NTA)}
+\NormalTok{commonNTA <-}\StringTok{ }\KeywordTok{intersect}\NormalTok{(greenThumbDataset}\OperatorTok{$}\NormalTok{NTA, }\KeywordTok{names}\NormalTok{(allCondoNTA))}
+\NormalTok{colours <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(avgNTACostDF}\OperatorTok{$}\NormalTok{NTA }\OperatorTok{%in%}\StringTok{ }\NormalTok{commonNTA, }\StringTok{"purple"}\NormalTok{, }\StringTok{"black"}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(avgNTACostDF}\OperatorTok{$}\NormalTok{AverageValue, }\DataTypeTok{col =}\NormalTok{ colours, }\DataTypeTok{xlab =} \StringTok{"NTAs"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"Value per square foot"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{geoPhyTask_files/figure-latex/greenThumb1-1.pdf}
+
+Based on the plots it seems to me that the properties in areas with
+community gardens have a less than average value per square foot for New
+York City.
+
+\subsection{Task 3b - Rental income}\label{task-3b---rental-income}
+
+In order to complete this task I took as the rental income the values in
+the column ``MANHATTAN.CONDOMINIUM.PROPERTY.Gross.Income.per.SqFt''.
+This column has values ranging from 0 to 67, I did find it odd that
+there were 2 zero values but based on the meta data I decided this was
+the best set of values to use. I compared the value and the rental
+income with a plot and a correlation
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{valueIncome <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{value =}\NormalTok{ condoDataset}\OperatorTok{$}\NormalTok{MANHATTAN.CONDOMINIUM.PROPERTY.Market.Value.per.SqFt, }
+                          \DataTypeTok{income =}\NormalTok{ condoDataset}\OperatorTok{$}\NormalTok{MANHATTAN.CONDOMINIUM.PROPERTY.Gross.Income.per.SqFt)}
+\NormalTok{valueIncome <-}\StringTok{ }\NormalTok{valueIncome[}\KeywordTok{order}\NormalTok{(valueIncome}\OperatorTok{$}\NormalTok{value), ]}
+
+\KeywordTok{matplot}\NormalTok{((valueIncome), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{geoPhyTask_files/figure-latex/rentalIncome1-1.pdf}
+
+Except for very few points the two vectors follow the same trend accross
+properties.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cor}\NormalTok{(valueIncome}\OperatorTok{$}\NormalTok{value, valueIncome}\OperatorTok{$}\NormalTok{income)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9753242
+\end{verbatim}
+
+The extremely high correlation value also shows that the rental income
+could be an important determinant of property value.
+
+
+\end{document}

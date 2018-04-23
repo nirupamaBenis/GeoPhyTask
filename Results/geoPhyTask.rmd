@@ -2,7 +2,9 @@
 title: "GeoPhy Task"
 author: "Nirupama Benis"
 date: "April 22, 2018"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -19,14 +21,17 @@ This script shows how I downloaded the datasets and processed them to answer the
 I downloaded the CSV versions of the datasets, although other versions like the RDF were available I did not see an added benefit in working with it for this task. Then I loaded the datasets into the R environment.
 
 ```{r loadData}
-condoDataset <- read.csv(file = "/home/niru/allInfoDir/otherWorkspaces/geophy/DOF__Condominium_comparable_rental_income___Manhattan_-_FY_2010_2011.csv", as.is = T)
+condoDataset <- read.csv(file = "/home/niru/allInfoDir/otherWorkspaces/geophy/Data/DOF__Condominium_comparable_rental_income___Manhattan_-_FY_2010_2011.csv", as.is = T)
 condoDataset <- condoDataset[!is.na(condoDataset$Latitude), ]
-greenThumbDataset <- read.csv(file = "/home/niru/allInfoDir/otherWorkspaces/geophy/NYC_Greenthumb_Community_Gardens.csv", as.is = T)
+
+greenThumbDataset <- read.csv(file = "/home/niru/allInfoDir/otherWorkspaces/geophy/Data/NYC_Greenthumb_Community_Gardens.csv", as.is = T)
 greenThumbDataset <- greenThumbDataset[!is.na(greenThumbDataset$Latitude), ]
 ```
 
 ## Task 1 - Visualize the datasets on a map
+
 I used the R package `ggmaps` to plot the data points
+
 ```{r visualize1}
 library(ggmap)
 ```
@@ -36,6 +41,7 @@ The Green Thumbs dataset has a bigger geographical spread than the condomonium d
 ```{r visualize2, message = F}
 centerGreen <- c(mean(range(greenThumbDataset$Longitude)), mean(range(greenThumbDataset$Latitude)))
 mapNY <- get_googlemap(center = centerGreen, zoom = 11)
+
 ggmap(mapNY)
 ```
 
@@ -46,6 +52,7 @@ mapPoints <- ggmap(mapNY) +
   geom_point(aes(x = condoDataset$Longitude, y = condoDataset$Latitude), data = condoDataset, alpha = .5, col = "black") + 
   geom_point(aes(x = greenThumbDataset$Longitude, y = greenThumbDataset$Latitude), data = greenThumbDataset, alpha = 1, col = "purple") +
   theme(axis.title.x = element_blank(), axis.title.y = element_blank())
+
 mapPoints
 ```
 
@@ -57,61 +64,77 @@ mapPointsValue <- ggmap(mapNY) +
   scale_color_gradient(high = "red4", low = "coral", name = "ValuePerSqFt") +
   geom_point(aes(x = greenThumbDataset$Longitude, y = greenThumbDataset$Latitude), data = greenThumbDataset, alpha = 1, col = "purple") +
   theme(axis.title.x = element_blank(), axis.title.y = element_blank())
+
 mapPointsValue
 ```
 
 ## Task 2 - Expensive Neighbourhood Tabulation Area
-In order to look at the property values of the NTAs, I looked at the average of the properties in each NTA in the data.
+
+In order to look at the property values of the NTAs, I looked at the average of the property values in each NTA in the data.
 
 ```{r maximumValue1}
 condoDataset$NTA <- gsub("[[:blank:]]+", "", condoDataset$NTA)
 allCondoNTA <- table(condoDataset$NTA)[order(table(condoDataset$NTA), decreasing = T)]
 ntaCostDF <- data.frame(condoDataset$NTA, condoDataset$MANHATTAN.CONDOMINIUM.PROPERTY.Market.Value.per.SqFt, stringsAsFactors = F)
-avgNTACostDF <- data.frame(NTA = names(allCondoNTA), AverageValue = numeric(length = length(allCondoNTA)), stringsAsFactors = F)
 
+avgNTACostDF <- data.frame(NTA = names(allCondoNTA), AverageValue = numeric(length = length(allCondoNTA)), stringsAsFactors = F)
 for (i in 1:length(allCondoNTA)) {
   tmpRows <- ntaCostDF[grep(names(allCondoNTA)[i], ntaCostDF$condoDataset.NTA, fixed = T), ]
   avgNTACostDF$AverageValue[i] <- mean(tmpRows[[2]])
 }
 ```
+
 There are a total of 28 NTAs in the condomonium dataset, of which the one called "park-cemetery-etc-Manhattan" had one property that had the highest value per square foot. 
+
 ```{r maximumValue2}
 avgNTACostDF[which.max(avgNTACostDF$AverageValue), ]
 ```
+
 Since this NTA only has one property listed there are not many conclusions that can be made, although a visualisation did show that it is right in the middle of Central Park.
+
 ```{r maximumValue3}
 priciestNTA <- avgNTACostDF$NTA[which.max(avgNTACostDF$AverageValue)]
 priciestNTAData <- condoDataset[grep(priciestNTA, condoDataset$NTA, fixed = T), ]
+
 mapPointsPriciest <- ggmap(mapNY) + 
   geom_point(aes(x = condoDataset$Longitude, y = condoDataset$Latitude), data = condoDataset, alpha = .5, col = "black") + 
   geom_point(aes(x = greenThumbDataset$Longitude, y = greenThumbDataset$Latitude), data = greenThumbDataset, alpha = .5, col = "purple") +
   geom_point(aes(x = priciestNTAData$Longitude, y = priciestNTAData$Latitude), data = priciestNTAData, alpha = .5, col = "red")
+
 mapPointsPriciest
 ```
 
 ## Task 3a - Green Thumb Data
+
 There are 18 NTAs from the condominium dataset that have community gardens. 
+
 ```{r greenThumb1}
 greenThumbDataset$NTA <- gsub("[[:blank:]]+", "",  greenThumbDataset$NTA)
 commonNTA <- intersect(greenThumbDataset$NTA, names(allCondoNTA))
 colours <- ifelse(avgNTACostDF$NTA %in% commonNTA, "purple", "black")
+
 plot(avgNTACostDF$AverageValue, col = colours, xlab = "NTAs", ylab = "Value per square foot")
 ```
 
 Based on the plots it seems to me that the properties in areas with community gardens have a less than average value per square foot for New York City.
 
 ## Task 3b - Rental income
+
 In order to complete this task I took as the rental income the values in the column "MANHATTAN.CONDOMINIUM.PROPERTY.Gross.Income.per.SqFt". This column has values ranging from 0 to 67, I did find it odd that there were 2 zero values but based on the meta data I decided this was the best set of values to use.
 I compared the value and the rental income with a plot and a correlation
+
 ```{r rentalIncome1}
 valueIncome <- data.frame(value = condoDataset$MANHATTAN.CONDOMINIUM.PROPERTY.Market.Value.per.SqFt, 
                           income = condoDataset$MANHATTAN.CONDOMINIUM.PROPERTY.Gross.Income.per.SqFt)
 valueIncome <- valueIncome[order(valueIncome$value), ]
+
 matplot((valueIncome), type = "l", lty = 1)
 ```
 
 Except for very few points the two vectors follow the same trend accross properties.
+
 ```{r rentalIncome2}
 cor(valueIncome$value, valueIncome$income)
 ```
+
 The extremely high correlation value also shows that the rental income could be an important determinant of property value.
